@@ -66,3 +66,15 @@ bella.speak()
 console.log(bella.toJSON())
 console.log(bella.toArray());
 console.log(bella.toPairs());
+
+///////////////////////////
+
+const s1 = 'We promptly judged antique ivory buckles for the next prize'
+      s2 = 'We promptly judged antique ivory buckles for the prize'
+
+console.log(s2.replace(/\s/g, '').toLowerCase().match(/([a-z])(?!.*\1)/g).length == 26 ? 'pangram' : 'not pangram');
+
+
+function beautify(s) {
+    if s.match
+}
