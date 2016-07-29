@@ -1,12 +1,14 @@
 // firstClass
 
-class Animal {
-    constructor(name) {
+class Dog {
+    constructor(name, age, favouriteThing) {
         this.name = name || 'No name given'
+        this.age = age || null
+        this.favouriteThing = favouriteThing || '' 
     }
 
     speak() {
-        console.log(this.name + ' makes a noise!');
+        console.log(this.name + ' goes \'woof\'!');
     }
 
     toJSON() {
@@ -27,12 +29,40 @@ class Animal {
             }
         }
     }
+
+    toArray() {
+        let model = []
+        Object.getOwnPropertyNames(this).forEach(
+            (key) => model.push(this[key])
+        )
+        return JSON.stringify(model)
+    }
+
+    toPairs() {
+        let model = []
+        Object.getOwnPropertyNames(this).forEach(
+            (key) => model.push([key, this[key]])
+        )
+        return JSON.stringify(model)
+    }
 }
 
-const dog = new Animal('Scruffy')
+const scruffy = new Dog('Scruffy', 3, 'Rawhide chew')
+const bellaJSON = JSON.stringify(
+    {
+        name: 'Bella',
+        age: 3,
+        favouriteThing: 'Chicken'
+    }
+)
+scruffy.speak()
+console.log(scruffy.toJSON())
+console.log(scruffy.toArray());
+console.log(scruffy.toPairs());
 
-dog.speak()
-console.log(dog.toJSON())
-dog.fromJSON('{"name":"Bella"}')
-dog.speak()
-console.log(dog.name);
+const bella = new Dog()
+bella.fromJSON(bellaJSON)
+bella.speak()
+console.log(bella.toJSON())
+console.log(bella.toArray());
+console.log(bella.toPairs());
