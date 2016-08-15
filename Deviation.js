@@ -1,12 +1,18 @@
-// 1. Split the array into an array f sequences of length d
-// 2. Find the min and max in each array, push the median into a new array
-// 3. Find the maximum value in the new median array
-
-function splitArray(arr, d) {
-
+function findMax(a) {
+    return a.reduce((prev, curr) => (curr > prev) ? curr : prev, 0)
 }
 
+function findMin(a) {
+    return a.reduce((prev, curr) => (curr < prev) ? curr : prev, findMax(a))
+}
 
+function medians(v, d) {
+    let median = []
+    v.forEach((e, i) => median.push(findMax(v.slice(i, d + i)) - findMin(v.slice(i, d + i))))
+    return median
+}
 
+const v = [6, 9, 4, 7, 4, 1],
+      d = 3
 
-const v = [6,9,4,7,4,1]
+console.log(findMax(medians(v, d)));
